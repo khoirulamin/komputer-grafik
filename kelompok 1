@@ -1,0 +1,317 @@
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
+import javafx.geometry.Rectangle2D;
+import javax.swing.JApplet;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
+ 
+
+public class TUGASUTSKELOMPOK1 extends JApplet{
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+        JFrame frame = new JFrame();
+        frame.setTitle("TUGAS UTS KELOMPOK 1");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JApplet applet = new TUGASUTSKELOMPOK1();
+        applet.init();
+        frame.getContentPane().add(applet);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    public void init() {
+        JPanel panel = new panel();
+        getContentPane().add(panel);
+    }
+}
+class panel extends JPanel implements Runnable{
+    int x = 0;//awan
+    int y = 300;//kapal
+    int z = 0;//orang
+    Thread t = new Thread(this); //funsinya untuk mengaktifkan animasi
+    //thread = untuk menjalankan aplikasi
+    //t = variabel
+ 
+    public panel() {
+        setPreferredSize(new Dimension(900, 480));
+        setBackground(Color.white);
+        t.start(); //fungsinya untuk menjalankan atau memulai animasi
+        //t didapat dari inisialisasi dari thread
+    }
+   
+    public void paintComponent(Graphics c) {
+        super.paintComponent(c);
+        Graphics2D c2 = (Graphics2D) c;
+        GeneralPath gp1 = new GeneralPath();
+        GeneralPath gp2 = new GeneralPath();
+        GradientPaint g3 = new GradientPaint(210, 300, Color.darkGray, 240, 320, Color.black);
+        GradientPaint g2 = new GradientPaint(220, 310, Color.darkGray, 270, 340, Color.black);
+ 
+        //Langit
+        Color grad1 = new Color(220, 233, 208);
+        Color grad2 = new Color(140, 206, 241);
+ 
+        GradientPaint langitBiru = new GradientPaint(0, 300, grad1, 0, 0, grad2);
+        java.awt.geom.Rectangle2D.Double langit = new java.awt.geom.Rectangle2D.Double(0, 0, 900, 500);
+        c2.draw(langit);
+        c2.setPaint(langitBiru);
+        c2.fill(langit);
+ 
+        //Laut
+        Color gradientLaut1 = new Color(1, 66, 107);
+        Color gradientLaut2 = new Color(107, 208, 211);
+        GradientPaint biruLaut = new GradientPaint(0, 300, gradientLaut1, 0, 300, gradientLaut2);
+        java.awt.geom.Rectangle2D.Double laut = new java.awt.geom.Rectangle2D.Double(0, 350, 900, 500);
+        c2.draw(laut);
+        c2.setPaint(biruLaut);
+        c2.fill(laut);
+ 
+        //matahari
+        Shape e1 = new Ellipse2D.Double(550, 50, 100, 100);
+        GradientPaint g1 = new GradientPaint(535, 80, Color.ORANGE, 550, 130, Color.YELLOW);
+        c2.setPaint(g1);
+        c2.fill(e1);
+ 
+        //sinar matahari      
+        c2.drawLine(500, 20, 580, 55);
+        c2.drawLine(450, 60, 560, 80);
+        c2.drawLine(430, 140, 570, 120);
+        c2.drawLine(470, 200, 600, 140);
+        c2.drawLine(550, 230, 600, 160);
+        c2.drawLine(640, 10, 590, 90);
+        c2.drawLine(730, 30, 600, 100);
+ 
+        //awan1 : pojok kiri
+        c2.setColor(Color.white);
+        Shape e6 = new Ellipse2D.Double(x, 75, 60, 30);
+        c2.fill(e6);
+        Shape e7 = new Ellipse2D.Double(x+35, 65, 50, 50); // x,y,lengkungan
+        c2.fill(e7);
+        Shape e7a = new Ellipse2D.Double(x+15, 65, 50, 50);
+        c2.fill(e7a);
+        Shape e7b = new Ellipse2D.Double(x+55, 65, 50, 50);
+        c2.fill(e7b);
+        Shape e8 = new Ellipse2D.Double(x+60, 75, 60, 30);
+        c2.fill(e8);
+ 
+        //awan2 : atas matahari
+        c2.setColor(Color.white);
+        Shape e9 = new Ellipse2D.Double(y, 20, 60, 30);
+        c2.fill(e9);
+        Shape e10 = new Ellipse2D.Double(y+35, 10, 50, 50);
+        c2.fill(e10);
+        Shape e10a = new Ellipse2D.Double(y+15, 10, 50, 50);
+        c2.fill(e10a);
+        Shape e10b = new Ellipse2D.Double(y+55, 10, 50, 50);
+        c2.fill(e10b);
+        Shape e11 = new Ellipse2D.Double(y+60, 20, 60, 30);
+        c2.fill(e11);
+ 
+        //awan3 menutupi matahari : sebelah kiri bawah
+        c2.setColor(Color.white);
+        Shape e12 = new Ellipse2D.Double(520, 130, 60, 30);// x,y,lengkungan
+        c2.fill(e12);
+        Shape e13 = new Ellipse2D.Double(555, 120, 50, 50);
+        c2.fill(e13);
+        Shape e13a = new Ellipse2D.Double(535, 120, 50, 50);
+        c2.fill(e13a);
+        Shape e13b = new Ellipse2D.Double(575, 120, 50, 50);
+        c2.fill(e13b);
+        Shape e14 = new Ellipse2D.Double(580, 130, 60, 30);
+        c2.fill(e14);
+ 
+        //awan4 menutupi matahari : sebelah kanan atas
+        c2.setColor(Color.white);
+        Shape e15 = new Ellipse2D.Double(580, 100, 60, 30);// x,y,lengkungan
+        c2.fill(e15);
+        Shape e16 = new Ellipse2D.Double(605, 90, 50, 50);
+        c2.fill(e16);
+        Shape e16a = new Ellipse2D.Double(595, 90, 50, 50);
+        c2.fill(e16a);
+        Shape e16b = new Ellipse2D.Double(635, 90, 50, 50);
+        c2.fill(e16b);
+        Shape e17 = new Ellipse2D.Double(640, 100, 60, 30);
+        c2.fill(e17);
+        
+        
+        //UFO
+        Ellipse2D.Double ufo = new Ellipse2D.Double(250, 50, 100, 25);
+        Line2D.Double antena = new Line2D.Double (300, 50, 300, 35);
+  
+        c2.setPaint(Color.black);
+        c2.fill(ufo);
+        c2.draw(ufo);
+        c2.draw(antena);
+        
+        
+         //GUNUNG SEGITIGA1
+        c2.setColor(new Color(162, 81, 31));//warna
+        Polygon p = new Polygon ();
+        int xPoly[]= {200, 300, 100};
+        int yPoly[]= {250, 350,350};
+        c2.fillPolygon(xPoly, yPoly, xPoly.length);
+        
+     
+ 
+        //orang
+        c2.setColor(Color.orange);
+        c2.fillOval (z+986,320,10,10);//pala
+        c2.fillRect(z+978,330,25,3);//tangan
+        c2.fillRect(z+990,327,3,15);//badan
+        c2.fillRect(z+988,335,3,15);//kaki1
+        c2.fillRect(z+993,335,3,15);//kaki2
+       
+        //atap kapal
+        gp2.moveTo(y+210, 270);
+        gp2.lineTo(y+240, 260);
+        gp2.lineTo(y+335, 260);
+        gp2.lineTo(y+340, 270);
+        gp2.closePath();
+        c2.draw(gp2);
+        c2.setPaint(g3);
+        c2.fill(gp2);
+       
+        //Badan Kapal
+        gp1.moveTo(y+140, 310);
+        gp1.lineTo(y+190, 360);
+        gp1.lineTo(y+350, 360);
+        gp1.lineTo(y+360, 330);
+        gp1.lineTo(y+360, 330);
+        gp1.lineTo(y+365, 310);
+        gp1.closePath();
+        c2.draw(gp1);
+        c2.setPaint(g2);
+        c2.fill(gp1);
+       
+        //bagian tengah kapal
+        GradientPaint g4= new GradientPaint(170, 120, Color.BLACK, 10, 190, Color.BLACK,true);
+        Shape r3= new java.awt.geom.Rectangle2D.Double(y+180, 290, 170, 25);
+        c2.setPaint(g4);
+        c2.fill(r3);
+        c2.setColor(Color.gray);
+        Shape r4=new java.awt.geom.Rectangle2D.Double(y+200, 270, 140, 20);
+        c2.fill(r4);
+        c2.setColor(Color.YELLOW); //jendela atas kabal
+        Shape r5=new java.awt.geom.Rectangle2D.Double(y+295, 275, 30, 10);
+        c2.fill(r5);
+        Shape r6=new java.awt.geom.Rectangle2D.Double(y+240,275, 10, 6);
+        c2.fill(r6);
+        Shape r7=new java.awt.geom.Rectangle2D.Double(y+220, 275, 10, 6);
+        c2.fill(r7);
+        c2.setColor(Color.red);
+        Shape r8=new java.awt.geom.Rectangle2D.Double(y+180, 309, 170, 4);
+        c2.fill(r8);
+       
+        //jendela kapal
+        c2.setColor(Color.white);
+        Shape e2 = new Ellipse2D.Double(y+190, 320, 15, 15);
+        Shape e3 = new Ellipse2D.Double(y+230, 320, 15, 15);
+        Shape e4 = new Ellipse2D.Double(y+270, 320, 15, 15);
+        Shape e5 = new Ellipse2D.Double(y+310, 320, 15, 15);
+        c2.fill(e2);
+        c2.fill(e3);
+        c2.fill(e4);
+        c2.fill(e5);
+       
+        //Tiang bendera
+        c2.setColor(Color.BLACK);
+        c2.drawLine(y+348, 290, y+348, 230);
+ 
+        //Bendera
+        c2.setColor(Color.red);
+        Shape r1=new java.awt.geom.Rectangle2D.Double(y+350, 230, 45, 10);
+        c2.fill(r1);
+        c2.setColor(Color.WHITE);
+        Shape r2=new java.awt.geom.Rectangle2D.Double(y+350, 240, 45, 10);
+        c2.fill(r2);
+        
+        
+       
+  
+       
+        //tepian laut
+        c2.setColor (new Color(0, 128, 0));
+        c2.fillArc(651, 350, 500, 60, 270, -180);//paling atas
+        c2.fillArc(625, 370, 550, 94, 270, -180);//tengah
+        c2.fillArc(605, 400, 590, 100, 270, -180);//paling bawah
+       
+        //jembatan
+        c2.setColor (Color.gray);
+        c2.fillRect(550, 350, 350, 20);
+        c2.fillRect(550, 350, 20, 150);
+ 
+        //pohon & batu
+        c2.setColor(Color.black);
+        c2.fillOval(832, 360, 25, 15);
+       
+        c2.setColor(new Color(74, 37, 0));
+        c2.fillRect(840, 300, 10, 80);
+       
+        c2.setColor(new Color(0, 255, 0));
+        c2.setStroke(new BasicStroke(3.0f));
+        c2.fillOval(810, 275, 60, 50);
+        c2.fillOval(800, 305, 60, 30);
+        c2.fillOval(830, 295, 60, 30);
+       
+        c2.setColor(Color.black);
+        c2.fillOval(820, 370, 25, 15);
+        c2.fillOval(842, 370, 25, 15);
+       
+        //rumput
+        c2.setColor(Color.green);
+        c2.drawArc(840, 405, 35, 20, 180, -180);
+        c2.drawArc(820, 415, 35, 20, 180, -180);
+        c2.drawArc(810, 405, 35, 20, 180, -180);
+        c2.drawArc(790, 415, 35, 20, 180, -180);      
+       
+        //text
+        c2.setColor(Color.black);
+        Font font = new Font("Tahoma", Font.BOLD, 10);
+        c2.setFont(font);
+        c2.drawString("CREATED BY KELOMPOK 1:", 750, 450);
+        Font font1 = new Font("Tahoma", Font.BOLD, 8);
+        c2.setFont(font1);
+        c2.drawString("IMAM RAMADHAN", 750, 460);
+        c2.drawString("NURMANSYAH", 750, 470);
+        c2.drawString("PUTRI ANGGINI", 750, 480);
+        c2.drawString("KHOIRUL AMIN", 750, 490);
+   
+    }
+    public void run() {
+        while (true) {
+            if (x <= 1000) { //angka disini maksudnya jauh dekatnya kapal berjalan
+                z--; //kalau ini diganti ++ arah dia akan melawan arah
+                x++; //jika keadaan benar dia akan mengulang
+                //x disini berarti miliknya awan1 yang pojok kiri
+                //y disini berarti miliknya kapal
+                if(x >= 400){
+                    z = 0;
+                    y--;  
+                }
+            }else {
+                z=0;
+                x=0;
+                y=300; //ini akan mengulang darimana awalnya dia start, maksudnya mengulang
+                //lagi tergantung nilai y yang diberikan
+            }
+            try {
+                repaint(); //untuk mewarnai lagi
+                Thread.sleep(10); //fungsinya untuk tidur selama 25 m/s (kecepatan)
+            } catch (Exception e) {
+            }
+        }
+    }
+}
